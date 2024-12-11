@@ -1,11 +1,9 @@
 from random import randint, choice
 
-# Inicjalizacja gracza
-hp = 100 #życie
+hp = 100
 uratowane_miasto = False
 pokonanych_zagrozen = 0
 
-# Funkcja do losowego zdarzenia
 def losowe_zdarzenia():
     zdazenia = [
         {"name": "Bandyta", "damage": randint(10, 20)},
@@ -19,7 +17,6 @@ print("Uważaj! Jeśli twoje życie spadnie do zera, przegrasz.")
 print("Pokonaj 5 zagrożeń, aby uratować miasto!\n")
 
 while hp > 0 and not uratowane_miasto:
-    # Losowe wydarzenie
     zdazenia = losowe_zdarzenia()
     print(f"Zagrożenie: {zdazenia['name']}! Może zadać do {zdazenia['damage']} obrażeń.")
     print("Co chcesz zrobić?")
@@ -30,7 +27,6 @@ while hp > 0 and not uratowane_miasto:
     decyzje_gracza = input("Wybierz (1/2/3): ")  
     
     if decyzje_gracza == "1":
-        # Walka
         uszkodzenie_przeciwnika = randint(10, 25) 
         uszkodzenie_gracza = zdazenia["damage"] 
         print(f"Zadałeś {uszkodzenie_przeciwnika} obrażeń {zdazenia['name']}!")
@@ -39,22 +35,19 @@ while hp > 0 and not uratowane_miasto:
         pokonanych_zagrozen += 1
         print(f"ilosc pokonanych zagrozen {pokonanych_zagrozen} ")
     elif decyzje_gracza == "2":
-        # Ucieczka
         ucieczka_od_uszkodzen = randint(5, 10)
         print(f"Udało ci się uciec, ale straciłeś {ucieczka_od_uszkodzen} punktów życia z wyczerpania.")
         hp -= ucieczka_od_uszkodzen
     elif decyzje_gracza == "3":
-        # Odpoczynek
         heal = randint(3, 9)
         print(f"Odpocząłeś i odzyskałeś {heal} punktów życia.")
         hp += heal
-        hp = min(hp, 100)  # Nie można mieć więcej niż 100 życia
+        hp = min(hp, 100) 
     else:
         print("Nieprawidłowy wybór, tracisz turę!")
     
     print(f"Twoje aktualne życie: {hp}\n")
     
-    # Sprawdzenie warunków zwycięstwa/przegranej
     if pokonanych_zagrozen >= 5:
         uratowane_miasto = True
         print("Gratulacje! Pokonałeś wszystkie zagrożenia i uratowałeś miasto!")
